@@ -1,24 +1,99 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Poetic Quote Generator</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&Balsamiq+Sans&family=Cinzel&family=Inconsolata&family=Sora&Lobster&family=Metal+Mania&family=MuseoModerno&family=Noto+Sans+HK&family=Pacifico&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphing Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        .calculator {
+            background-color: #443434;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+        }
+        .display {
+            width: 100%;
+            height: 50px;
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 8px;
+            font-size: 24px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .graph-display {
+            width: 100%;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #222;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            padding: 20px;
+            background-color: #eee;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .button.operator {
+            background-color: #ff9500;
+            color: #fff;
+        }
+        .button.span-two {
+            grid-column: span 2;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <img class="avatar" src="avatar.jpg" alt="A headshot of the quote author" />
-        <div id="loader">
-            <img id="loader-img" src="loading.gif" alt="Loading spinner"/>
-            <h3>Fetching phrase &amp; image...</h3>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="graph-display" id="graph"></div>
+        <div class="buttons">
+            <button class="button span-two" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="deleteLast()">DEL</button>
+            <button class="button operator" onclick="appendOperator('/')">/</button>
+            <button class="button" onclick="appendNumber(7)">7</button>
+            <button class="button" onclick="appendNumber(8)">8</button>
+            <button class="button" onclick="appendNumber(9)">9</button>
+            <button class="button operator" onclick="appendOperator('*')">*</button>
+            <button class="button" onclick="appendNumber(4)">4</button>
+            <button class="button" onclick="appendNumber(5)">5</button>
+            <button class="button" onclick="appendNumber(6)">6</button>
+            <button class="button operator" onclick="appendOperator('-')">-</button>
+            <button class="button" onclick="appendNumber(1)">1</button>
+            <button class="button" onclick="appendNumber(2)">2</button>
+            <button class="button" onclick="appendNumber(3)">3</button>
+            <button class="button operator" onclick="appendOperator('+')">+</button>
+            <button class="button span-two" onclick="appendNumber(0)">0</button>
+            <button class="button" onclick="appendNumber('.')">.</button>
+            <button class="button operator" onclick="calculateResult()">=</button>
         </div>
-        <div class="quote-wrapper">
-            <h2 class="quote"><span><span class="quote-span"></span></span></h2>
-        </div>
-        <div class="name-wrapper">
-            <span><span class="name-span"></span></span>
-        </div>
+        <input type="text" id="functionInput" placeholder="Enter function f(x)" style="margin-top: 10px; width: 100%; padding: 8px; border-radius: 5px;">
+        <button class="button operator" style="width: 100%; margin-top: 10px;" onclick="plotFunction()">Plot Function</button>
     </div>
-    <script src="index.js" type="module"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.2/math.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
